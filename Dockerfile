@@ -20,6 +20,6 @@ RUN composer install --no-dev --optimize-autoloader
 
 # Cấp quyền cho thư mục storage và bootstrap/cache
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
-
+EXPOSE 8000
 # Đặt lệnh chạy ứng dụng Laravel (Sử dụng php-fpm hoặc artisan serve)
-CMD ["php", "artisan", "serve", "--host=localhost", "--port=8000"]
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
