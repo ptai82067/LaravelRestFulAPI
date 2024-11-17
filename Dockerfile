@@ -22,4 +22,4 @@ RUN composer install --no-dev --optimize-autoloader
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
 # Đặt lệnh chạy ứng dụng Laravel (Sử dụng php-fpm hoặc artisan serve)
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+CMD ["php", "artisan", "serve", "--host=localhost", "--port=8000"]
