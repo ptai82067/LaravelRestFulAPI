@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: LaravelAPI
+    env: php
+    plan: free
+    buildCommand: 
+      - apt-get update && apt-get install -y curl zip unzip git
+      - curl -sS https://getcomposer.org/installer | php
+      - php composer.phar install
+    startCommand: php artisan serve --host 0.0.0.0 --port 10000
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        value: (key của bạn)
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        value: sql108.infinityfree.com
+      - key: DB_PORT
+        value: '3306'
+      - key: DB_DATABASE
+        value: if0_37728845_demobanhang
+      - key: DB_USERNAME
+        value: if0_37728845
+      - key: DB_PASSWORD
+        value: ww5ZVNLZpZJiqs
