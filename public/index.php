@@ -13,5 +13,10 @@ if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php'))
 require __DIR__.'/../vendor/autoload.php';
 
 // Bootstrap Laravel and handle the request...
-(require_once __DIR__.'/../bootstrap/app.php')
-    ->handleRequest(Request::capture());
+$app = require_once __DIR__.'/../bootstrap/app.php';
+
+// Nếu đang chạy trên môi trường Render, thay vì sử dụng cổng mặc định 8000, hãy sử dụng cổng từ biến môi trường.
+$port = getenv('PORT') ?: 8000;  // Mặc định là 8000 nếu không có biến PORT từ môi trường
+
+// Bắt đầu xử lý yêu cầu
+$app->run(Request::capture(), $port);
