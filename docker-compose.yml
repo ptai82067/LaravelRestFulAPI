@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      DB_HOST: sql108.infinityfree.com
+      DB_PORT: 3306
+      DB_DATABASE: if0_37728845_demobanhang
+      DB_USERNAME: if0_37728845
+      DB_PASSWORD: ww5ZVNLZpZJiqs
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
