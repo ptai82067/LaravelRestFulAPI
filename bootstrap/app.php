@@ -1,18 +1,19 @@
 <?php
 
 use Illuminate\Foundation\Application;
-use Illuminate\Foundation\Configuration\Exceptions;
-use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
 
-return Application::configure(basePath: dirname(__DIR__))
-    ->withRouting(
-        web: __DIR__.'/../routes/web.php',
-        commands: __DIR__.'/../routes/console.php',
-        health: '/up',
-    )
-    ->withMiddleware(function (Middleware $middleware) {
-        //
-    })
-    ->withExceptions(function (Exceptions $exceptions) {
-        //
-    })->create();
+define('LARAVEL_START', microtime(true));
+
+// Kiểm tra chế độ bảo trì
+if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
+    require $maintenance;
+}
+
+// Đăng ký autoloader của Composer
+require __DIR__.'/../vendor/autoload.php';
+
+// Khởi tạo ứng dụng và xử lý yêu cầu
+$app = require_once __DIR__.'/../bootstrap/app.php';
+$app->make(Illuminate\Contracts\Http\Kernel::class)->handle(Request::capture());
+

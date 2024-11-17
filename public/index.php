@@ -19,4 +19,5 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 $port = getenv('PORT') ?: 8000;  // Mặc định là 8000 nếu không có biến PORT từ môi trường
 
 // Bắt đầu xử lý yêu cầu
-$app->run(Request::capture(), $port);
+$app->make(Illuminate\Contracts\Http\Kernel::class)->handle(Request::capture());
+
