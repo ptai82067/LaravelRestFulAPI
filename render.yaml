@@ -1,18 +1,23 @@
 services:
   - type: web
     name: LaravelAPI
-    env: php
+    env: local
     plan: free
-    buildCommand: 
-      - apt-get update && apt-get install -y curl zip unzip git
-      - curl -sS https://getcomposer.org/installer | php
-      - php composer.phar install
+    buildCommand: |
+      apt-get update && apt-get install -y curl zip unzip git
+      curl -sS https://getcomposer.org/installer | php
+      php composer.phar install
+      php artisan key:generate
     startCommand: php artisan serve --host 0.0.0.0 --port 10000
     envVars:
       - key: APP_ENV
         value: production
       - key: APP_KEY
-        value: (key của bạn)
+        value: base64:XBut1hUuYuwDE9uWOXA9z81KcFJEX5nxxnnxtA+rCQw= # Bạn nên tạo key bằng lệnh `php artisan key:generate` hoặc copy từ `.env`
+      - key: APP_DEBUG
+        value: true
+      - key: APP_URL
+        value: https://your-app-url.onrender.com
       - key: DB_CONNECTION
         value: mysql
       - key: DB_HOST
